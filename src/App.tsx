@@ -7,7 +7,10 @@ export function App(){
     // throw new error ('Lol')
     return(
         <>
+       <div className="background-image-vivo">
         <Form />
+       </div>
         </>
+       
     )
 }

@@ -8,13 +8,18 @@ const { presets } = require("./babel.config");
 module.exports = (env, argv) => {
   const isProduction = argv.mode === "production";
   return {
-    entry: "./src/index.jsx", // Arquivo de entrada
+    entry: "./src/index.tsx", // Arquivo de entrada
     output: {
       path: path.resolve(__dirname, "dist"), // Caminho para a saída
       filename: "bundle.js", // Arquivo gerado
     },
     module: {
       rules: [
+        {
+          test: /\.(ts|tsx)$/,
+          exclude: /node_modules/,
+          use: 'babel-loader',
+        },
         {
           test: /\.(js|jsx)$/, // Testar arquivos JS e JSX
           exclude: /node_modules/,
@@ -55,7 +60,7 @@ module.exports = (env, argv) => {
       ],
     },
     resolve: {
-      extensions: [".js", ".jsx"], // Resolver extensões JS e JSX
+      extensions: [".ts",".tsx",".js", ".jsx"], // Resolver extensões JS e JSX
     },
     plugins: [
       new HtmlWebpackPlugin({
