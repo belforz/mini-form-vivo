@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { themes } from "../form";
 
 const Form: React.FC = () => {
-  const [theme,setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [nome, setNome] = useState<string>("");
   const [squad, setSquad] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [review, setReview] = useState<string>("");
   const [improvements, setImprovements] = useState<string>("");
 
-  const toggleTheme =() => {
-    setTheme(theme ==='light' ? 'dark': 'light');
-  }
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ const Form: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-8 shadow-lg rounded-lg">
+    <div className=" max-w-md w-full max-h-screen overflow-auto bg-white p-6 shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold mb-6 text-center">
         Formulário de apresentação
       </h2>
@@ -46,7 +46,7 @@ const Form: React.FC = () => {
               id="nome"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
               placeholder="Digite seu nome"
             />
           </label>
@@ -60,7 +60,7 @@ const Form: React.FC = () => {
               id="squad"
               value={squad}
               onChange={(e) => setSquad(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
             >
               <option value="" disabled hidden className="text-gray-400">
                 Selecione uma squad
@@ -83,7 +83,7 @@ const Form: React.FC = () => {
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
               placeholder="Descreva o seu trabalho"
             />
           </label>
@@ -93,14 +93,21 @@ const Form: React.FC = () => {
             className="block text-gray-700 font-medium mb-2"
           >
             Avaliação:
-            <input
+            <textarea
+              className="w-full h-32 p-2 border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400 rounded-md resize-none -break-words"
+              placeholder="Digite seu texto aqui"
+              id="review"
+              value={review}
+              onChange={(e) =>setReview(e.target.value)}
+            ></textarea>
+            {/* <input
               type="text"
               id="review"
               value={review}
               onChange={(e) => setReview(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-96 h-20 p-4 break-all border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Avaliação do projeto"
-            />
+            /> */}
           </label>
 
           <label
@@ -108,19 +115,28 @@ const Form: React.FC = () => {
             className="block text-gray-700 font-medium mb-2"
           >
             Melhorias:
-            <input
+            <textarea
+              className="w-full h-32 p-2 border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400 rounded-md resize-none -break-words"
+              placeholder="Digite seu texto aqui"
+              id="improvements"
+              value={improvements}
+              onChange={(e) =>setImprovements(e.target.value)}
+            >
+
+            </textarea>
+            {/* <input
               type="text"
               id="improvements"
               value={improvements}
               onChange={(e) => setImprovements(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Sugestões de melhorias"
-            />
+            /> */}
           </label>
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            className="w-full bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600"
           >
             Enviar
           </button>
