@@ -1,32 +1,51 @@
 import React, { useState } from "react";
 import { themes } from "../form";
-
+import { adicionarDados } from "../../fireStoreService";
+import { enableMultiTabIndexedDbPersistence } from "firebase/firestore";
+ 
 const Form: React.FC = () => {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [nome, setNome] = useState<string>("");
-  const [squad, setSquad] = useState<string>("");
+  const [squad, setSquad] = useState<number | ''>("");
   const [description, setDescription] = useState<string>("");
   const [review, setReview] = useState<string>("");
-  const [improvements, setImprovements] = useState<string>("");
+  const [improvements, setImprovements] = useState<string>("");[]
+  const [mensagemErro, setMensagemErro] = useState<string | null >(null);
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const numerosSquads = [
+    {id: 1, nome: "Bot"},
+    {id: 2, nome: "Gerência"},
+    {id: 3, nome: "Push"},
+    {id: 4, nome: "Aplicativo"},
+    {id: 5, nome: "Outros"},
+
+  ]
+
+  const handleSubmit =  async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(
-      "Nome: ",
-      nome,
-      "Squad: ",
-      squad,
-      "Descrição: ",
-      description,
-      "Avaliação: ",
-      review,
-      "Melhorias: ",
-      improvements
-    );
+    setMensagemErro(null);
+
+    console.log("Formulário submetido com:", {nome,squad,description,review,improvements})
+
+
+    try{
+      await adicionarDados({nome,squad:Number(squad),description,review,improvements});
+      setNome ('');
+      setSquad('');
+      setDescription ('');
+      setReview ('');
+      setImprovements ('');
+
+      console.log("Usuário adicionaod com sucesso:")
+
+    } catch (error:any){
+      console.error('Erro ao adicionar o usuário: ', error);
+      setMensagemErro(error.message);
+    }
   };
 
   return (
@@ -36,11 +55,13 @@ const Form: React.FC = () => {
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
+          {mensagemErro && <p className="text-red-500 text-sm mb-4">{mensagemErro}</p>}
           <label
             htmlFor="nome"
             className="block text-gray-700 font-medium mb-2"
           >
             Nome:
+            
             <input
               type="text"
               id="nome"
@@ -59,17 +80,15 @@ const Form: React.FC = () => {
             <select
               id="squad"
               value={squad}
-              onChange={(e) => setSquad(e.target.value)}
+              onChange={(e) => setSquad(Number(e.target.value))}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
             >
               <option value="" disabled hidden className="text-gray-400">
                 Selecione uma squad
               </option>
-              <option value="Bot">Bot</option>
-              <option value="Gerência">Gerência</option>
-              <option value="Push">Push</option>
-              <option value="SDK">Aplicativo</option>
-              <option value="Outros">Outros</option>
+              {numerosSquads.map(({id,nome}) =>(
+                <option key={id}value={id}>{nome}</option>
+              ))}
             </select>
           </label>
 
@@ -93,6 +112,10 @@ const Form: React.FC = () => {
             className="block text-gray-700 font-medium mb-2"
           >
             Avaliação:
+
+            < p className="py-1 mb-1 text-purple-500 text-xs text-opacity-50">
+            O que você acha como está meu desempenho que pode ser no geral ou não.
+            </p>
             <textarea
               className="w-full h-32 p-2 border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400 rounded-md resize-none -break-words"
               placeholder="Digite seu texto aqui"
@@ -115,6 +138,10 @@ const Form: React.FC = () => {
             className="block text-gray-700 font-medium mb-2"
           >
             Melhorias:
+
+            < p className="py-1 mb-1 text-purple-500 text-xs text-opacity-50">
+            O que você acha como está meu desempenho que pode ser no geral ou não.
+            </p>
             <textarea
               className="w-full h-32 p-2 border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400 rounded-md resize-none -break-words"
               placeholder="Digite seu texto aqui"
