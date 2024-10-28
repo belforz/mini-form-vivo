@@ -72,7 +72,7 @@ module.exports = (env, argv) => {
       }),
       ...(isProduction ? [] :[new ReactRefreshWebpackPlugin]),
     ],
-    devtool: isProduction ? SourceMap : "eval-cheap-module-source-map", // source maps para identificações de erro
+    devtool: isProduction ? 'source-map' : "eval-cheap-module-source-map", // source maps para identificações de erro
     devServer: {
       static: {
         directory: path.join(__dirname, "dist"),

@@ -26,6 +26,11 @@ body{
 
 }
 
+.hide-scrollbar{
+    scrollbar-width: none;
+    overflow: auto;
+    
+}
 @media (max-width: 1920px){
     .background-image-vivo{
         background-size: cover;

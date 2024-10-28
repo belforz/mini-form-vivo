@@ -48,7 +48,7 @@ const Form: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-    <div className="max-w-md w-full max-h-screen overflow-auto bg-white p-6 shadow-lg rounded-lg">
+    <div className="max-w-md w-full max-h-screen overflow-auto bg-white p-6 shadow-lg rounded-lg hide-scrollbar">
       <h2 className="text-2xl font-bold mb-6 text-center">
         Formulário de apresentação
       </h2>
