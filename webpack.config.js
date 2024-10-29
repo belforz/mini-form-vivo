@@ -1,78 +1,56 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { DefinePlugin } = require("webpack");
-const { SourceMap } = require("module");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
-const { presets } = require("./babel.config");
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === "production";
   return {
-    entry: "./src/index.tsx", // Arquivo de entrada
+    entry: "./src/index.tsx",
     output: {
-      path: path.resolve(__dirname, "dist"), // Caminho para a saída
-      filename: "bundle.js", // Arquivo gerado
+      path: path.resolve(__dirname, "dist"),
+      filename: "bundle.js",
     },
     module: {
       rules: [
         {
-          test: /\.(ts|tsx)$/,
+          test: /\.(js|jsx|ts|tsx)$/,
           exclude: /node_modules/,
           use: 'babel-loader',
         },
         {
-          test: /\.(js|jsx)$/, // Testar arquivos JS e JSX
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader", // Transpilar código JS/JSX com Babel,
-            options:{
-              presets:['@babel/preset-react'],
-              plugins:[
-                !isProduction && require.resolve("react-refresh/babel"), // Adiciona react refresh em dev server
-
-              ].filter(Boolean), //Remove valores falsos
-            }
-          },
+          test: /\.css$/,
+          use: [
+            "style-loader",
+            "css-loader",
+            "postcss-loader",
+          ],
         },
         {
-          test: /\.css$/,
-          // Aplica as regras para arquivos .css
-          use: [
-            "style-loader",
-            // Adiciona CSS ao DOM injetando <style>
-            "css-loader",
-            // Interpreta @import e url()
-            "postcss-loader",
-          
-          ],
-        },{
           test: /\.(scss|sass)$/,
-          // Aplica as regras para arquivos .scss
           use: [
             "style-loader",
-            // Adiciona CSS ao DOM injetando <style>
             "css-loader",
-            ""
-            // Interpreta @import e url()
-          
+            "sass-loader",
           ],
-        }
+        },
       ],
     },
     resolve: {
-      extensions: [".ts",".tsx",".js", ".jsx"], // Resolver extensões JS e JSX
+      extensions: [".ts", ".tsx", ".js", ".jsx"],
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: "./public/index.html",
         filename: "index.html",
+        inject: "body",
       }),
       new DefinePlugin({
-        "process.env.NODE_ENV": JSON.stringify(argv.mode), // Corrigido com vírgula
+        "process.env.NODE_ENV": JSON.stringify(argv.mode),
       }),
-      ...(isProduction ? [] :[new ReactRefreshWebpackPlugin]),
-    ],
-    devtool: isProduction ? 'source-map' : "eval-cheap-module-source-map", // source maps para identificações de erro
+      !isProduction && new ReactRefreshWebpackPlugin(),
+    ].filter(Boolean),
+    devtool: isProduction ? 'source-map' : "eval-cheap-module-source-map",
     devServer: {
       static: {
         directory: path.join(__dirname, "dist"),
@@ -85,6 +63,6 @@ module.exports = (env, argv) => {
     optimization: {
       minimize: isProduction,
     },
-    mode: isProduction ? "production" : "development", // alterna entre modos
+    mode: isProduction ? "production" : "development",
   };
 };
