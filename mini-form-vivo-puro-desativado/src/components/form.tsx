@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { adicionarDados } from "./../fireStoreService";
+import { adicionarDados } from "../../fireStoreService";
 import { FeedbackComponent, ErrorFeedbackComponent } from "./feedbackComponents";
 
 const Form: React.FC = () => {

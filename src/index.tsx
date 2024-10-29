@@ -1,13 +1,13 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import { App } from "./App";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 import './index.css';
+import {App} from './App';
 
 const container = document.getElementById('root');
-const root = createRoot(container);
+const root = createRoot(container!); // O '!' é usado para indicar que 'container' não é null
 
-console.log('App carregado')
-
-root.render(<App/>)
-
-
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

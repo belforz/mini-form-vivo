@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    
+
+}
+
+.background-image-vivo{
+    background-image: url('/public/images/imagem.png');
+    background-clip: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 110vh;
+    width: auto;
+}
+
+.background-image-vivinho {
+    background-image: url('/public/images/vivinho-background.png');
+    background-clip: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 110vh;
+    width: auto;
+
+}
+
+.hide-scrollbar{
+    scrollbar-width: none;
+    overflow: auto;
+    
+}
+@media (max-width: 1920px){
+    .background-image-vivo{
+        background-size: cover;
+    }
+    .background-image-vivinho{
+        display: none;
+    }
+}
+
+@media (max-width: 1000px){
+    .background-image-vivinho{
+        display: block;
+        
+    }
+}
