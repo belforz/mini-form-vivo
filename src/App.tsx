@@ -1,5 +1,6 @@
 import React from "react";
 import Form from "./components/form";
+import Slideshow from "./components/slideshow";
 
 
 export function App(){
@@ -10,7 +11,8 @@ export function App(){
 
        <div className="background-image-vivo">
         <div className="absolute inset-0 items-center justify-center">
-        <Form />
+            <Slideshow />
+        {/* <Form /> */}
        </div>
        </div>
        
