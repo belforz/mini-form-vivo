@@ -46,7 +46,23 @@ body{
         
     }
 }
-.slide-wrapper {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Ajuste o valor conforme necessário */
+  
+
+ /* CSS para transições de opacidade */
+.opacity-100 {
+    opacity: 1;
+  }
+  .opacity-0 {
+    opacity: 0;
+  }
+  
+  /* Classe para as imagens do slideshow */
+  .slideshow-content img {
+    transition: opacity 3s ease-in-out;
+  }
+  
+  /* Estilo para o contêiner do slide */
+  .slide-wrapper {
+    transition: opacity 3s ease-in-out; /* Adiciona transição suave */
   }
   

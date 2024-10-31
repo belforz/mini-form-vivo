@@ -8,7 +8,7 @@ type Theme = {
 
 type Slideshow = {
   url: string;
-  image: string;
+  name: string;
   id: number;
 };
 
@@ -32,22 +32,22 @@ export const slideshowImages: Record< string,
 > = {
   image1: {
     url: "/images/apresentacao.png",
-    image: "Apresentação",
+    name: "Apresentação",
     id: 1,
   },
   image2: {
     url: "/images/meio.png",
-    image: "Meio",
+    name: "Meio",
     id: 2,
   },
   image3: {
     url: "/images/meiofim.png",
-    image: "No Meio",
+    name: "No Meio",
     id: 3,
   },
   image4: {
     url: "/images/fim.png",
-    image: "Fim",
+    name: "Fim",
     id: 4,
   },
 };

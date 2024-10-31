@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { adicionarDados } from "./../fireStoreService";
 import { FeedbackComponent, ErrorFeedbackComponent } from "./feedbackComponents";
 
-const Form: React.FC = () => {
+interface FormProps {
+  onSubmitSuccess: () => void;
+}
+
+  const Form: React.FC<FormProps> = ({onSubmitSuccess}) => {
   const [nome, setNome] = useState<string>("");
   const [squad, setSquad] = useState<number | ''>("");
   const [description, setDescription] = useState<string>("");
@@ -23,6 +27,8 @@ const Form: React.FC = () => {
     e.preventDefault();
     setFeedback(null);
     setErros([]);
+
+    onSubmitSuccess();
 
     console.log("Formulário submetido com:", { nome, squad, description, review, improvements });
 
