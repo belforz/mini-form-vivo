@@ -31,12 +31,12 @@ export const slideshowImages: Record< string,
   Slideshow
 > = {
   image1: {
-    url: "/images/apresentacao.png",
+    url: "/images/apresentacao1.png",
     name: "Apresentação",
     id: 1,
   },
   image2: {
-    url: "/images/meio.png",
+    url: "/images/meio1.png",
     name: "Meio",
     id: 2,
   },
