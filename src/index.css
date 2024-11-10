@@ -66,3 +66,28 @@ body{
     transition: opacity 3s ease-in-out; /* Adiciona transição suave */
   }
   
+  @keyframes borderGradient {
+    0% {
+      border-color: #800080; /* Purple */
+    }
+    25% {
+      border-color: #ff69b4; /* Hot Pink */
+    }
+    50% {
+      border-color: #8a2be2; /* Blue Violet */
+    }
+    75% {
+      border-color: #ff00ff; /* Magenta */
+    }
+    100% {
+      border-color: #800080; /* Purple */
+    }
+  }
+  
+  .animate-border-gradient {
+    border-width: 4px;
+    border-style: solid;
+    animation: borderGradient 5s infinite linear;
+    border-radius: 15px; /* Para manter o efeito arredondado */
+  }
+  
