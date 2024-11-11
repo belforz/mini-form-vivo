@@ -12,6 +12,12 @@ type Slideshow = {
   id: number;
 };
 
+type SlideshowMobile = {
+  url: string;
+  name: string;
+  id: number;
+};
+
 // Definir o ojeto dos temas
 
 export const themes: Record<"light" | "dark", Theme> = {
@@ -47,6 +53,31 @@ export const slideshowImages: Record< string,
   },
   image4: {
     url: "/images/fim.png",
+    name: "Fim",
+    id: 4,
+  },
+};
+
+export const slideshowMobile: Record< string,
+  Slideshow
+> = {
+  image1: {
+    url: "/images/apresentacao-mobile.png",
+    name: "Apresentação",
+    id: 1,
+  },
+  image2: {
+    url: "/images/apresentacao-mobile2.png",
+    name: "Meio",
+    id: 2,
+  },
+  image3: {
+    url: "/images/apresentacao-mobile3.png",
+    name: "No Meio",
+    id: 3,
+  },
+  image4: {
+    url: "/images/apresentacao-mobile4.png",
     name: "Fim",
     id: 4,
   },
